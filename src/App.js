@@ -31,7 +31,7 @@ function App() {
     },
     {
       type: "multiple",
-      question: "When did you first kiss for me?",
+      question: "When did you give your first kiss?",
       options: ["Sep 12", "Nov 02", "Aug 16", "I Don't remember 😅"],
       correctAnswer: "Sep 12",
       wrongReaction: "❌ How could you forget our first kiss? 😢",
