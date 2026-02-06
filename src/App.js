@@ -53,7 +53,7 @@ function App() {
       correctAnswer: "candle light dinner",
       wrongReaction: "❌ Look at the photo again! 💭",
       reaction: "📸 Perfect memory! 💕",
-      defaultPhoto: "/Screenshot 2026-02-02 121324.png",
+      defaultPhoto: "/WhatsApp Image 2026-02-06 at 4.35.21 PM.jpeg",
     },
   ];
 
@@ -62,7 +62,6 @@ function App() {
 
     const currentQ = questions[currentQuestion];
 
-    // Special handling for Yes/No question (Question 4)
     if (currentQ.type === "yesno") {
       if (answer === "No") {
         setShowReaction(currentQ.wrongReaction);
@@ -75,10 +74,8 @@ function App() {
         setShowReaction(currentQ.reaction);
       }
     } else {
-      // Check if answer is correct for questions with correctAnswer
       if (currentQ.correctAnswer) {
         if (answer !== currentQ.correctAnswer) {
-          // Wrong answer - show wrong reaction and don't proceed
           setShowReaction(currentQ.wrongReaction);
           setTimeout(() => {
             setShowReaction(null);
@@ -87,11 +84,9 @@ function App() {
           return;
         }
       }
-      // Correct answer or no validation needed
       setShowReaction(currentQ.reaction);
     }
 
-    // Wait for reaction, then move to next
     setTimeout(() => {
       const newAnswers = [...answers, answer];
       setAnswers(newAnswers);
@@ -123,165 +118,265 @@ function App() {
   const currentQ = questions[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-400 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Animated background hearts */}
+    <div className="min-h-screen bg-gradient-to-br from-rose-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(30)].map((_, i) => (
+        {/* Floating orbs */}
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute text-white opacity-20 animate-float"
+            className="absolute rounded-full mix-blend-screen animate-float-slow"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 200 + 50}px`,
+              height: `${Math.random() * 200 + 50}px`,
+              background: `radial-gradient(circle, ${
+                ['rgba(255,182,193,0.3)', 'rgba(218,112,214,0.3)', 'rgba(255,105,180,0.3)'][i % 3]
+              }, transparent)`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${Math.random() * 10 + 10}s`,
+            }}
+          />
+        ))}
+        
+        {/* Hearts */}
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={`heart-${i}`}
+            className="absolute text-pink-300 opacity-10 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 5}s`,
-              fontSize: `${Math.random() * 30 + 20}px`,
+              fontSize: `${Math.random() * 40 + 30}px`,
             }}
           >
-            {["💕", "💗", "💖", "💝", "❤️", "🌹"][Math.floor(Math.random() * 6)]}
+            ♥
           </div>
         ))}
       </div>
 
-      <div className="w-full max-w-lg relative z-10">
+      <div className="w-full max-w-2xl relative z-10">
         {/* Greeting Screen */}
         {showGreeting ? (
-          <div className="bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl p-8 text-center">
-            <div className="mb-6 animate-bounce">
-              <div className="text-9xl mb-4">💝</div>
-              <div className="text-6xl">🌹</div>
-            </div>
+          <div className="relative animate-fade-in-scale">
+            {/* Neon glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-75 animate-pulse"></div>
             
-            <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-red-500 to-purple-600 mb-6 animate-pulse">
-              Happy Valentine's Day!
-            </h1>
-            
-            <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 mb-8">
-              <p className="text-2xl text-gray-800 mb-4 font-semibold">
-                My Dearest Love 💕
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                On this special day, I want to celebrate our beautiful journey together.
-                Every moment with you is a treasure, every memory a precious gem.
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                I've prepared a special quiz just for you, filled with our memories
-                and dreams. Let's relive our beautiful moments together! ✨
-              </p>
-            </div>
+            <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl shadow-2xl p-10 border border-pink-500/30">
+              <div className="text-center">
+                <div className="mb-8 animate-bounce-slow">
+                  <div className="inline-block relative">
+                    <div className="absolute inset-0 bg-pink-500 rounded-full blur-2xl opacity-50 animate-pulse"></div>
+                    <div className="relative text-9xl">💝</div>
+                  </div>
+                </div>
+                
+                <h1 className="text-6xl font-black mb-4 relative">
+                  <span className="absolute inset-0 blur-md text-pink-500 opacity-50">
+                    Advance Happy Valentine's
+                  </span>
+                  <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 animate-gradient">
+                    Advance Happy Valentine's
+                  </span>
+                </h1>
+                
+                <div className="h-1 w-32 mx-auto bg-gradient-to-r from-transparent via-pink-500 to-transparent mb-8"></div>
+                
+                <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-2xl p-8 mb-8 backdrop-blur-sm border border-pink-500/20">
+                  <p className="text-3xl text-pink-300 mb-6 font-bold tracking-wide">
+                    My Dearest Love 💕
+                  </p>
+                  <p className="text-lg text-gray-300 leading-relaxed mb-4">
+                    On this special day, I want to celebrate our beautiful journey together.
+                    Every moment with you is a treasure, every memory a precious gem.
+                  </p>
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    I've prepared a special quiz just for you, filled with our memories
+                    and dreams. Let's relive our beautiful moments together! ✨
+                  </p>
+                </div>
 
-            <div className="flex flex-col gap-3 mb-6">
-              <div className="flex items-center justify-center gap-2 text-pink-600">
-                <span className="text-2xl">💖</span>
-                <span className="text-lg font-semibold">With All My Love</span>
-                <span className="text-2xl">💖</span>
+                <div className="flex items-center justify-center gap-3 mb-8">
+                  <span className="text-3xl animate-pulse">💖</span>
+                  <span className="text-xl text-pink-400 font-semibold tracking-wider">With All My Love</span>
+                  <span className="text-3xl animate-pulse" style={{ animationDelay: '0.5s' }}>💖</span>
+                </div>
+
+                <button
+                  onClick={startQuiz}
+                  className="group relative w-full py-6 overflow-hidden rounded-2xl text-xl font-bold"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 animate-gradient"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative text-white flex items-center justify-center gap-3">
+                    <span className="text-2xl">🎯</span>
+                    Start Our Love Quiz
+                    <span className="text-2xl">💕</span>
+                  </span>
+                </button>
               </div>
             </div>
-
-            <button
-              onClick={startQuiz}
-              className="w-full bg-gradient-to-r from-pink-500 via-red-500 to-purple-500 hover:from-pink-600 hover:via-red-600 hover:to-purple-600 text-white font-bold py-5 px-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 text-xl"
-            >
-              Start Our Love Quiz 💕
-            </button>
           </div>
         ) : !showResult ? (
-          <div className="bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden">
-            {/* Score bar */}
-            <div className="bg-gradient-to-r from-pink-200 to-purple-200 p-4 text-center">
-              <div className="text-purple-800 font-bold text-lg">
-                Question {currentQuestion + 1} of {questions.length}
+          <div className="relative animate-fade-in-scale">
+            {/* Neon glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-60"></div>
+            
+            <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-pink-500/30">
+              {/* Header with neon effect */}
+              <div className="relative bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-pink-500/20 p-6 border-b border-pink-500/30">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-pink-400 font-bold text-lg tracking-wider">
+                    QUESTION {currentQuestion + 1}/{questions.length}
+                  </div>
+                  <div className="flex gap-2">
+                    {questions.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`transition-all duration-500 ${
+                          index < currentQuestion
+                            ? "w-8 h-3 bg-gradient-to-r from-green-400 to-green-500 shadow-lg shadow-green-500/50"
+                            : index === currentQuestion
+                            ? "w-12 h-3 bg-gradient-to-r from-pink-400 to-purple-400 shadow-lg shadow-pink-500/50 animate-pulse"
+                            : "w-6 h-3 bg-gray-600"
+                        } rounded-full`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Progress bar */}
+                <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-700 ease-out shadow-lg shadow-pink-500/50"
+                    style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                  ></div>
+                </div>
               </div>
-            </div>
 
-            {/* Question card */}
-            <div className="p-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center leading-tight">
-                {currentQ.question}
-              </h2>
-
-              {/* Photo display for photo questions */}
-              {currentQ.type === "photo" && (
-                <div className="mb-6">
-                  {/* Photo display */}
-                  <div className="flex justify-center">
-                    <div className="relative">
-                      <div className="w-64 h-64 bg-gradient-to-br from-pink-300 to-purple-300 rounded-2xl overflow-hidden shadow-xl border-4 border-white">
-                        <img
-                          src={currentQ.defaultPhoto}
-                          alt="Our Memory"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      {/* Heart overlay */}
-                      <div className="absolute top-2 right-2">
-                        <div className="text-4xl animate-pulse">❤️</div>
-                      </div>
-                      {/* Decorative hearts */}
-                      <div className="absolute -bottom-2 -left-2 text-3xl animate-bounce">
-                        💕
-                      </div>
-                      <div className="absolute -top-2 -left-2 text-2xl animate-pulse">
-                        ✨
-                      </div>
+              {/* Question content */}
+              <div className="p-8">
+                {/* Question box */}
+                <div className="relative mb-8">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl blur opacity-30"></div>
+                  <div className="relative bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-2xl p-6 border border-pink-500/30 backdrop-blur-sm">
+                    <div className="flex items-center gap-4">
+                      <div className="text-4xl flex-shrink-0 animate-pulse">💭</div>
+                      <h2 className="text-2xl font-bold text-white leading-tight">
+                        {currentQ.question}
+                      </h2>
                     </div>
                   </div>
                 </div>
-              )}
 
-              {/* Options */}
-              <div className="space-y-3">
-                {currentQ.options.map((option, index) => {
-                  const isSelected = selectedOption === option;
-                  const isYesNoQuestion = currentQ.type === "yesno";
-                  const isYes = option === "Yes ❤️";
-                  const isNo = option === "No";
+                {/* Photo display */}
+                {currentQ.type === "photo" && (
+                  <div className="mb-8">
+                    <div className="flex justify-center">
+                      <div className="relative group">
+                        {/* Animated border */}
+                        <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 rounded-3xl blur-lg opacity-75 group-hover:opacity-100 transition-all duration-500 animate-gradient"></div>
+                        
+                        <div className="relative">
+                          <div className="w-80 h-80 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden border-4 border-pink-500/50 shadow-2xl transform transition-transform duration-500 group-hover:scale-105">
+                            <img
+                              src={currentQ.defaultPhoto}
+                              alt="Our Memory"
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 via-transparent to-pink-900/40"></div>
+                          </div>
+                          
+                          {/* Corner decorations */}
+                          <div className="absolute -top-3 -right-3 text-4xl animate-bounce-slow">❤️</div>
+                          <div className="absolute -bottom-3 -left-3 text-4xl animate-spin-slow">✨</div>
+                          <div className="absolute -top-3 -left-3 text-3xl animate-pulse">💕</div>
+                          <div className="absolute -bottom-3 -right-3 text-3xl animate-bounce">🌟</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => handleAnswer(option)}
-                      disabled={showReaction !== null}
-                      className={`
-                        w-full py-4 px-6 rounded-2xl font-semibold text-lg
-                        transition-all duration-300 transform
-                        ${
-                          isYesNoQuestion && isYes
-                            ? "bg-gradient-to-r from-green-400 to-green-500 text-white hover:from-green-500 hover:to-green-600 shadow-lg shadow-green-200"
-                            : ""
-                        }
-                        ${
-                          isYesNoQuestion && isNo
-                            ? "bg-gradient-to-r from-red-400 to-red-500 text-white hover:from-red-500 hover:to-red-600 shadow-lg shadow-red-200"
-                            : ""
-                        }
-                        ${
-                          !isYesNoQuestion
-                            ? "bg-gradient-to-r from-pink-100 to-purple-100 text-gray-800 hover:from-pink-200 hover:to-purple-200 border-2 border-pink-200"
-                            : ""
-                        }
-                        ${
-                          isSelected ? "scale-95 opacity-50" : "hover:scale-105"
-                        }
-                        disabled:cursor-not-allowed
-                      `}
-                    >
-                      {option}
-                    </button>
-                  );
-                })}
+                {/* Options */}
+                <div className="space-y-4">
+                  {currentQ.options.map((option, index) => {
+                    const isSelected = selectedOption === option;
+                    const isYesNoQuestion = currentQ.type === "yesno";
+                    const isYes = option === "Yes ❤️";
+                    const isNo = option === "No";
+
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => handleAnswer(option)}
+                        disabled={showReaction !== null}
+                        className={`
+                          group relative w-full py-5 px-6 rounded-xl font-bold text-lg
+                          transition-all duration-300 transform overflow-hidden
+                          ${isSelected ? "scale-95 opacity-50" : "hover:scale-105"}
+                          disabled:cursor-not-allowed
+                        `}
+                      >
+                        {/* Animated background */}
+                        <div className={`
+                          absolute inset-0 transition-all duration-300
+                          ${isYesNoQuestion && isYes
+                            ? "bg-gradient-to-r from-green-500 to-emerald-500 group-hover:from-green-600 group-hover:to-emerald-600"
+                            : isYesNoQuestion && isNo
+                            ? "bg-gradient-to-r from-red-500 to-rose-500 group-hover:from-red-600 group-hover:to-rose-600"
+                            : "bg-gradient-to-r from-pink-500/30 to-purple-500/30 group-hover:from-pink-500/50 group-hover:to-purple-500/50"
+                          }
+                        `}></div>
+                        
+                        {/* Border glow */}
+                        <div className={`
+                          absolute inset-0 rounded-xl border-2 transition-all duration-300
+                          ${isYesNoQuestion && isYes
+                            ? "border-green-400 group-hover:shadow-lg group-hover:shadow-green-500/50"
+                            : isYesNoQuestion && isNo
+                            ? "border-red-400 group-hover:shadow-lg group-hover:shadow-red-500/50"
+                            : "border-pink-400 group-hover:shadow-lg group-hover:shadow-pink-500/50"
+                          }
+                        `}></div>
+                        
+                        {/* Hover shine effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                        
+                        {/* Content */}
+                        <div className="relative z-10 flex items-center justify-center gap-3 text-white">
+                          {!isYesNoQuestion && (
+                            <span className="text-2xl">{["💝", "🌹", "✨", "💕"][index % 4]}</span>
+                          )}
+                          <span>{option}</span>
+                          {!isYesNoQuestion && (
+                            <span className="text-2xl">{["💝", "🌹", "✨", "💕"][index % 4]}</span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Reaction overlay */}
               {showReaction && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
-                  <div className="bg-gradient-to-br from-yellow-200 via-pink-200 to-purple-200 p-8 rounded-3xl shadow-2xl max-w-md mx-4 animate-bounce-in">
-                    <div className="text-center">
-                      <div className="text-5xl mb-4">
-                        {showReaction.includes("❌") || showReaction.includes("Invalid") ? "❌" : "✨"}
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-lg flex items-center justify-center z-50 animate-fade-in">
+                  <div className="relative">
+                    {/* Pulsing glow */}
+                    <div className="absolute -inset-8 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 rounded-3xl blur-3xl opacity-60 animate-pulse"></div>
+                    
+                    <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 p-12 rounded-3xl shadow-2xl max-w-md mx-4 animate-bounce-in border-2 border-pink-500/50">
+                      <div className="text-center">
+                        <div className="text-8xl mb-6 animate-bounce">
+                          {showReaction.includes("❌") || showReaction.includes("Invalid") ? "❌" : "🎉"}
+                        </div>
+                        <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 whitespace-pre-line leading-relaxed">
+                          {showReaction}
+                        </p>
                       </div>
-                      <p className="text-2xl font-bold text-gray-800 whitespace-pre-line">
-                        {showReaction}
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -289,35 +384,55 @@ function App() {
             </div>
           </div>
         ) : (
-          <div className="bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl p-8">
-            <div className="text-center mb-8">
-              <div className="text-8xl mb-4 animate-bounce">💝</div>
-              <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-4">
-                🎉 Quiz Complete! 🎉
-              </h2>
-              <p className="text-xl text-gray-700">
-                You completed all {questions.length} questions!
-              </p>
-            </div>
+          <div className="relative animate-fade-in-scale">
+            <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-75 animate-pulse"></div>
+            
+            <div className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl shadow-2xl p-10 border border-pink-500/30">
+              <div className="text-center mb-8">
+                <div className="inline-block relative mb-6">
+                  <div className="absolute inset-0 bg-pink-500 rounded-full blur-3xl opacity-50 animate-pulse"></div>
+                  <div className="relative text-9xl animate-bounce-slow">💝</div>
+                </div>
+                
+                <h2 className="text-5xl font-black mb-4">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 animate-gradient">
+                    Quiz Complete!
+                  </span>
+                </h2>
+                
+                <div className="flex items-center justify-center gap-2 text-pink-400 text-xl mb-8">
+                  <span className="text-3xl">🎊</span>
+                  <span>You completed all {questions.length} questions!</span>
+                  <span className="text-3xl">🎊</span>
+                </div>
+              </div>
 
-            <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 mb-6">
-              <h3 className="text-xl font-bold text-purple-800 mb-4 text-center">
-                Thank you for being my Valentine! 💕
-              </h3>
-              <p className="text-center text-gray-700 text-lg mb-3">
-                Every moment with you is special ❤️
-              </p>
-              <p className="text-center text-gray-600 italic">
-                "You are my today and all of my tomorrows" 🌹
-              </p>
-            </div>
+              <div className="bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-2xl p-8 mb-8 border border-pink-500/20 backdrop-blur-sm">
+                <h3 className="text-2xl font-bold text-pink-300 mb-4 text-center">
+                  Thank you for being my Valentine! 💕
+                </h3>
+                <p className="text-center text-gray-300 text-xl mb-4">
+                  Every moment with you is special ❤️
+                </p>
+                <div className="h-1 w-48 mx-auto bg-gradient-to-r from-transparent via-pink-500 to-transparent mb-4"></div>
+                <p className="text-center text-pink-400 italic text-lg">
+                  "You are my today and all of my tomorrows" 🌹
+                </p>
+              </div>
 
-            <button
-              onClick={resetQuiz}
-              className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-red-500 hover:from-pink-600 hover:via-purple-600 hover:to-red-600 text-white font-bold py-4 px-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 text-lg"
-            >
-              Play Again 🔄
-            </button>
+              <button
+                onClick={resetQuiz}
+                className="group relative w-full py-6 overflow-hidden rounded-2xl text-xl font-bold"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 animate-gradient"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative text-white flex items-center justify-center gap-3">
+                  <span className="text-2xl">🔄</span>
+                  Play Again
+                  <span className="text-2xl">💕</span>
+                </span>
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -328,7 +443,22 @@ function App() {
             transform: translateY(0) rotate(0deg);
           }
           50% {
-            transform: translateY(-20px) rotate(5deg);
+            transform: translateY(-30px) rotate(10deg);
+          }
+        }
+        
+        @keyframes float-slow {
+          0%, 100% {
+            transform: translate(0, 0);
+          }
+          25% {
+            transform: translate(10px, -10px);
+          }
+          50% {
+            transform: translate(-10px, -20px);
+          }
+          75% {
+            transform: translate(-20px, -10px);
           }
         }
         
@@ -341,13 +471,24 @@ function App() {
           }
         }
         
+        @keyframes fade-in-scale {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
         @keyframes bounce-in {
           0% {
             transform: scale(0.3);
             opacity: 0;
           }
           50% {
-            transform: scale(1.05);
+            transform: scale(1.1);
           }
           70% {
             transform: scale(0.9);
@@ -358,16 +499,64 @@ function App() {
           }
         }
         
+        @keyframes bounce-slow {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+        
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        
+        @keyframes gradient {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        
         .animate-float {
-          animation: float 6s ease-in-out infinite;
+          animation: float 8s ease-in-out infinite;
+        }
+        
+        .animate-float-slow {
+          animation: float-slow 20s ease-in-out infinite;
         }
         
         .animate-fade-in {
           animation: fade-in 0.3s ease-out;
         }
         
+        .animate-fade-in-scale {
+          animation: fade-in-scale 0.5s ease-out;
+        }
+        
         .animate-bounce-in {
-          animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .animate-bounce-slow {
+          animation: bounce-slow 3s ease-in-out infinite;
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
+        }
+        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
         }
       `}</style>
     </div>
