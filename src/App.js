@@ -69,7 +69,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-pink-100 to-rose-100 flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         <h1 className="text-5xl font-bold text-center text-pink-600 mb-8 drop-shadow-lg">
-          💝 Valentine's Day💝
+          💝 Valentine's Day Raju💝
         </h1>
 
         {!showResult ? (
